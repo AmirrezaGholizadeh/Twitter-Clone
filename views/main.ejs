@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/main.css">
+    <title>Blog</title>
+</head>
+<body>
+    <h1>simple blog</h1>
+    <h3>There are currently <%= number_of_users %> users registered</h3>
+
+    <div>
+        <div>
+         <% post_data.reverse().forEach(function (post_data) { %>
+         <div class="content">
+             <div class="postname"> <%= post_data.Title %> </div>
+             <div class="postcontent"> <%= post_data.Content %></div>
+             <div class="author">Author: <%= post_data.Author %></div>
+         </div>
+         <% }) %>
+        </div>
+ 
+     </div>
+
+<!---   <script>
+       const newDiv = document.createElement("div")
+
+        // and give it some content
+        const newContent = document.createTextNode("Hi there and greetings!")
+
+        // add the text node to the newly created div
+        newDiv.appendChild(newContent)
+
+        // add the newly created element and its content into the DOM
+        document.body.appendChild(newDiv)
+    </script>
+    <script>
+        import {Posts} from '../post'
+
+            const cursor=Posts
+            const newDiv = document.createElement("div");
+            const newContent = document.createTextNode(element.postname);
+            newDiv.appendChild(newContent)
+            document.body.appendChild(newDiv)
+    </script>-->
+
+
+<!--<script src="./main.js"></script> -->
+</body>
+</html>

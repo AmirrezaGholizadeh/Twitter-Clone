@@ -8,11 +8,10 @@ This is a mini Twitter clone built using the MERN stack (MongoDB, Express, React
 
 - **User Authentication**: Secure login and signup using JWT.
 - **Tweet Functionality**: Create, read, update, and delete tweets.
-- **Follow System**: Follow and unfollow users.
 - **Like System**: Like and unlike tweets.
 - **Responsive Design**: Fully responsive UI using Tailwind CSS.
 - **User Profiles**: View user profiles and their tweets.
-- **Feed**: View tweets from followed users.
+- **Feed**: View tweets from other users.
 
 ## Technologies Used
 
@@ -42,7 +41,7 @@ Follow these steps to get a local copy up and running:
 ### Clone the Repository
 
 ```sh
-git clone https://github.com/your-username/mini-twitter-clone.git
+git clone https://github.com/AmirrezaGholizadeh/Twitter-Clone.git
 cd mini-twitter-clone
 ```
 
@@ -80,11 +79,6 @@ cd mini-twitter-clone
     npm install
     ```
 
-3. Create a `.env` file in the frontend directory with the following environment variables:
-    ```env
-    REACT_APP_API_URL=http://localhost:5000/api
-    ```
-
 4. Start the frontend server:
     ```sh
     npm start
@@ -92,7 +86,7 @@ cd mini-twitter-clone
 
 ### Running the Application
 
-- The backend server should be running on [http://localhost:5000](http://localhost:8080)
+- The backend server should be running on [http://localhost:8080](http://localhost:8080)
 - The frontend server should be running on [http://localhost:3000](http://localhost:3000)
 
 ## Usage

@@ -1,13 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 function Posts({ showButton, className, username, mainPage }) {
   const [postsData, setPostsData] = useState([]);
+  const [localUsername, setLocalUsername] = useState("");  
   const redirect = useNavigate();
-  const localUsername = window.localStorage.getItem("username");
+  const token = localStorage.getItem("access_token");
 
+  // const token = localStorage.getItem("access_token");
+  
   axios.defaults.withCredentials = true;
+ 
+  useEffect(() => {
+    try {
+      // const token = localStorage.getItem("access_token");
+
+      if (!token) throw new Error();
+
+      const userData = jwtDecode(token);
+
+      setLocalUsername(userData.username);
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }, []);
 
   // Fetch posts data on component mount
   useEffect(() => {

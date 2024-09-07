@@ -35,8 +35,8 @@ function Login() {
       } else {
         // Store the response data in localStorage
         window.localStorage.setItem("access_token", response.data.token);
-        window.localStorage.setItem("userID", response.data.userID);
-        window.localStorage.setItem("username", response.data.username);
+        // window.localStorage.setItem("userID", response.data.userID);
+        // window.localStorage.setItem("username", response.data.username);
         navigate("/");
       }
     } catch (error) {

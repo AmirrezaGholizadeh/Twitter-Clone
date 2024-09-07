@@ -3,25 +3,53 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Posts from "./posts";
 import Navbar from "./navbar";
+import { jwtDecode } from "jwt-decode";
+
 
 function Profile() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [userPosts, setUserPosts] = useState([]);
   const [emptyPosts, setEmptyPosts] = useState(false);
-  const username = window.localStorage.getItem("username");
+  const [localUsername, setLocalUsername] = useState('');  
+
+  useEffect(() => {
+    try {
+      const token = localStorage.getItem("access_token");
+
+      if(!token)
+        throw new Error()
+
+      const userData = jwtDecode(token);
+
+      setLocalUsername(userData.username);
+    } catch (error) {
+      console.log(error); 
+    }
+  }, [id])
+  // const token = localStorage.getItem("access_token");
+
+  // const userData = jwtDecode(token);
+
+  // const localUsername = userData.username;
+
 
   // Fetch user posts when component mounts or ID changes
   useEffect(() => {
     axios
       .get(`http://localhost:8080/${id}`)
       .then((res) => {
-        setUserPosts(res.data.userPosts);
+        try{
+          setUserPosts(res.data.userPosts);
 
-        // Set emptyPosts to true if there are no posts
-        if (res.data.userPosts === 0) {
-          setEmptyPosts(true);
+          // Set emptyPosts to true if there are no posts
+          if (res.data.userPosts === 0) {
+            setEmptyPosts(true);
+          }
+        } catch (error) {
+          throw new Error()
         }
+
       })
       .catch((error) => {
         console.log(error);
@@ -38,9 +66,9 @@ function Profile() {
       const response = await axios.post("http://localhost:8080/logout");
 
       // Clear all localStorage items
-      localStorage.removeItem("username")
+      // localStorage.removeItem("username")
       localStorage.removeItem("access_token");
-      localStorage.removeItem("userID");
+      // localStorage.removeItem("userID");
       // Redirect to login page
       alert("Logged out successfully");
       navigate("/login");
@@ -77,7 +105,7 @@ function Profile() {
       </div>
 
       {/* Log out button, visible only if the logged-in user is viewing their own profile */}
-      {username === id ? (
+      {localUsername === id ? (
         <div className="relative col-start-3 md:ml-5 md:w-1/5">
           <button
             className="ml-10 bg-black text-white h-8 m-2 w-20 rounded-lg hover:bg-gray-800 dark:bg-babyBlue dark:hover:bg-hoverBlue"

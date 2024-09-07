@@ -1,8 +1,24 @@
 import React, { useState, useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
 
 function Navbar() {
-  const username = window.localStorage.getItem("username");
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [localUsername, setLocalUsername] = useState("");  
+  const token = localStorage.getItem("access_token");
+
+   useEffect(() => {
+    try {
+      // const token = localStorage.getItem("access_token");
+
+      // if (!token) throw new Error();
+
+      const userData = jwtDecode(token);
+
+      setLocalUsername(userData.username);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   // Check and apply the dark mode preference from localStorage on initial render
   useEffect(() => {
@@ -14,7 +30,7 @@ function Navbar() {
       setIsDarkMode(false);
       document.documentElement.classList.remove("dark");
     }
-  }, []);
+  },[]);
 
   // Toggle dark mode and update the localStorage preference
   const toggleDarkMode = () => {
@@ -46,7 +62,7 @@ function Navbar() {
       </a>
 
       {/* Profile icon linking to the user's profile page */}
-      <a href={`http://localhost:3000/${username}`}>
+      <a href={`http://localhost:3000/${localUsername}`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import Register from "./components/register";
 import Login from "./components/login";
 import Main from "./components/main";
-import NewPost from "./components/newPost";
 import Profile from "./components/profile";
 import EditPost from "./components/editpost";
 import Posts from "./components/posts";
@@ -14,7 +13,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/createpost" element={<NewPost />} />
+        <Route path="/createpost" element={<Posts />} />
         <Route path="/:id" element={<Profile />} />
         <Route path="/editpost/:post_id" element={<EditPost />} />
       </Routes>

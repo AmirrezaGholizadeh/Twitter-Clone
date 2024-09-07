@@ -28,7 +28,7 @@ function Register() {
     try {
       const res = await axios.post("http://localhost:8080/register", {
         username: username.toLowerCase(),
-        email,
+        email,  
         password,
         confirmPassword,
       });
